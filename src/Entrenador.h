@@ -13,7 +13,7 @@ class Entrenador : public Persona {
         ~Entrenador();
         float getSalarioBase() const;
         int getAnioComienzo() const;
-        string toString() const;
-}
+        std::string toString() const;
+};
 
 #endif
