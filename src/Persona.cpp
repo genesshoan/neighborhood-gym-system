@@ -6,6 +6,8 @@ long Persona::getCedula() const{
     return cedula;
 }
 
-std::string Persona::getNombre()const{
+std::string Persona::getNombre() const{
     return nombre;
 }
+
+Persona::~Persona() {}
