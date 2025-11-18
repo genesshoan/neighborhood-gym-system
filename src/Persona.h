@@ -5,10 +5,12 @@
 
 class Persona {
 private:
+
     long cedula;
     std::string nombre;
 
 public:
+
     /*
     Descripción: Constructor de Persona. Inicializa la cédula y el nombre de la persona.
 

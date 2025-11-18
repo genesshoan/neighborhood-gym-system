@@ -9,6 +9,7 @@ y proporciona métodos para acceder a esos datos y obtener una representación e
 */
 class Entrenador : public Persona {
     private:
+    
         float salarioBase;
         int anioComienzo;
 
