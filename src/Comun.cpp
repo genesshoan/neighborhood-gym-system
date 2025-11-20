@@ -14,12 +14,12 @@ float Comun::calcularCuota(){
 
     if (extra > base){
         cuota = extra;
-    }
-    else if (extra <= base * 0.25){
+    } else if (extra <= base * 0.25){
         cuota = base + (extra / 2);
-    }
-    else if (extra <= base * 0.75){
+    } else if (extra <= base * 0.75){
         cuota = base + extra;
+    } else {
+        cuota = extra;
     }
 
     if (mes == 1) || (mes == 2){
