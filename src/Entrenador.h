@@ -2,6 +2,7 @@
 #define ENTRENADOR_H
 
 #include "Persona.h"
+#include <sstream>
 
 /*
 Clase Entrenador que hereda de Persona. Representa a un entrenador con información de salario base y año de comienzo, 

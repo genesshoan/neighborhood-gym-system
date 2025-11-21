@@ -74,6 +74,10 @@ class Socio : public Persona {
         Retorna: cadena con el tipo del socio.
         */
         virtual std::string getTipo() const = 0;
+
+        
+        virtual std::string toStringCompleto() const = 0;
+
 };
 
 #endif
