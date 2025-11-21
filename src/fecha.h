@@ -85,6 +85,13 @@ class Fecha {
         Si alguna de las fechas no es válida, devuelve false.
         */
         bool operator< (const Fecha &) const;
+        /*
+        Operadores adicionales de comparación.
+        */
+        bool operator!= (const Fecha &) const;
+        bool operator>  (const Fecha &) const;
+        bool operator<= (const Fecha &) const;
+        bool operator>= (const Fecha &) const;
 
         /*
         Descripción: Operadores de incremento (prefijo y sufijo).

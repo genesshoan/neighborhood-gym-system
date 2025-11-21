@@ -65,7 +65,7 @@ class Socio : public Persona {
 
         Retorna: cuota calculada (float).
         */
-        virtual float calcularCuota() const = 0;
+        virtual float calcularCuota(int) const = 0;
 
         /*
         Descripción: Devuelve el tipo de socio (por ejemplo "Activo", "VIP", etc.).

@@ -8,7 +8,7 @@ float Comun::getExtra() const{
     return extra;
 }
 
-float Comun::calcularCuota(int mes){
+float Comun::calcularCuota(int mes) const{
     float base = getCuotaBase();
     float cuota = 0;
 
@@ -27,7 +27,7 @@ float Comun::calcularCuota(int mes){
     return cuota;
 }
 
-std::string Comun::getTipo(){
+std::string Comun::getTipo() const{
     return "Comun";
 }
 

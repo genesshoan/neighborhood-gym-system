@@ -45,15 +45,29 @@ void Fecha::siguiente () {
 }
 
 bool Fecha::operator== (const Fecha & f2) const {
-    if ((!esValida()) || (!f2.esValida())) return false;
     return dia == f2.dia && mes == f2.mes && anio == f2.anio;
 }
 
 bool Fecha::operator< (const Fecha & f2) const {
-    if ((!esValida()) || (!f2.esValida())) return false;
     if (anio != f2.anio) return anio < f2.anio;
     if (mes != f2.mes) return mes < f2.mes;
     return dia < f2.dia;
+}
+
+bool Fecha::operator!= (const Fecha & f2) const {
+    return !(*this == f2);
+}
+
+bool Fecha::operator> (const Fecha & f2) const {
+    return f2 < *this;
+}
+
+bool Fecha::operator<= (const Fecha & f2) const {
+    return !(f2 < *this);
+}
+
+bool Fecha::operator>= (const Fecha & f2) const {
+    return !(*this < f2);
 }
 
 Fecha& Fecha::operator++ () {

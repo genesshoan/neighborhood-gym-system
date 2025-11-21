@@ -54,7 +54,7 @@ class Comun : public Socio{
 
         Retorna: cuota calculada (float).
         */
-        float calcularCuota(int);
+        float calcularCuota(int) const;
 
         /*
         Descripción: Devuelve el tipo de socio. Para esta clase devuelve
@@ -62,7 +62,7 @@ class Comun : public Socio{
 
         Retorna: cadena con el tipo de socio.
         */
-        std::string getTipo();
+        std::string getTipo() const;
 
         /*
         Descripción: Genera y devuelve una representación en cadena con la
