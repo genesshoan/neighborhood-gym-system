@@ -6,6 +6,7 @@ void Socios::destruir(Nodo * nodo) {
     destruir(nodo->hizq);
     destruir(nodo->hder);
 
+    delete nodo->info;
     delete nodo;
 }
 
@@ -33,6 +34,8 @@ void Socios::insert(Nodo* &nodo, Socio * s){
 }
 
 Socio *Socios::find(Nodo * nodo, long c) {
+    if (nodo == nullptr) return nullptr;
+
     if (c == nodo->info->getCedula())
         return nodo->info;
     else if (c < nodo->info->getCedula())
@@ -118,6 +121,7 @@ bool Socios::esVacio() {
 }
 
 Socio * Socios::socioMayorCuotaMensual(int mes) {
+    if (esVacio()) return nullptr;
     Socio *mayorCuota = abb->info;
     socioMayorCuotaMensual(abb, mes, mayorCuota);
     return mayorCuota;
