@@ -2,7 +2,7 @@
 
 Becado::Becado(long ci, std::string nom, float cuota, std::string dom, Entrenador *ent, float p, Fecha f) : Socio(ci, nom, cuota, dom, ent), porcentaje(p), fechaOtorgada(f) {}
 
-Becado::~Becado(){}
+Becado::~Becado() {}
         
 float Becado::getPorcentaje() const { return porcentaje; }
 
