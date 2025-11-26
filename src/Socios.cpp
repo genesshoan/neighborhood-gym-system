@@ -64,8 +64,8 @@ int Socios::calcularSociosBecadosFecha(Nodo * nodo, Fecha f) {
     if (nodo == nullptr) return 0;
 
     int res = 0;
-    if (nodo->info->getTipo() == "Becado") {
-        if (((Becado *)nodo->info)->getFechaOtorgada() > f)
+    if (nodo->info->getTipo() == TipoSocio::BECADO) {
+        if (((Becado *)nodo->info)->getFechaOtorgada() >= f)
             res = 1;
     }
 
@@ -98,7 +98,7 @@ void Socios::insert(Socio *s) {
     insert(abb, s);
 } 
         
-const Socio * Socios::find(long c) {
+Socio * Socios::find(long c) {
     return find(abb, c);
 }
 

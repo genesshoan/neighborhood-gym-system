@@ -75,7 +75,7 @@ class Becado : public Socio{
 
         Retorna: cadena con el tipo de socio.
         */
-        std::string getTipo() const;
+        TipoSocio getTipo() const;
 
         /*
         Descripción: Genera una representación en cadena con la información

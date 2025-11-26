@@ -43,7 +43,7 @@ void Entrenadores::insert(Entrenador *ent) {
     aux->sig = new Nodo{ ent, nullptr };
 }
         
-const Entrenador * Entrenadores::find(long cedula) {
+Entrenador * Entrenadores::find(long cedula) {
     Nodo *aux = hash[h(cedula)];
 
     while (aux && aux->info->getCedula() != cedula) {

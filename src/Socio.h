@@ -3,6 +3,7 @@
 
 #include "Persona.h"
 #include "Entrenador.h"
+#include "TipoSocio.h"
 
 /*
 Clase Socio que hereda de Persona. Representa a un socio del gimnasio con información
@@ -73,7 +74,7 @@ class Socio : public Persona {
 
         Retorna: cadena con el tipo del socio.
         */
-        virtual std::string getTipo() const = 0;
+        virtual TipoSocio getTipo() const = 0;
 
         
         virtual std::string toStringCompleto() const = 0;

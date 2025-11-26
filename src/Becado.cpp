@@ -25,8 +25,8 @@ float Becado::calcularCuota(int mes) const {
     return cuota;
 }
 
-std::string Becado::getTipo() const {
-    return "Becado";
+TipoSocio Becado::getTipo() const {
+    return TipoSocio::BECADO;
 }
 
 std::string Becado::toString() const {

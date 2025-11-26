@@ -76,7 +76,7 @@ class Entrenadores {
 
         Retorna: puntero const a Entrenador si lo encuentra, o nullptr si no existe.
         */
-        const Entrenador * find(long);
+        Entrenador * find(long);
 
         /*
         Descripción: Devuelve un `Iterador` con todos los entrenadores

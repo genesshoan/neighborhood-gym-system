@@ -27,8 +27,8 @@ float Comun::calcularCuota(int mes) const{
     return cuota;
 }
 
-std::string Comun::getTipo() const{
-    return "Comun";
+TipoSocio Comun::getTipo() const{
+    return TipoSocio::COMUN;
 }
 
 std::string Comun::toString() const {

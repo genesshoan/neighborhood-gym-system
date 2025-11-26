@@ -62,7 +62,7 @@ class Comun : public Socio{
 
         Retorna: cadena con el tipo de socio.
         */
-        std::string getTipo() const;
+        TipoSocio getTipo() const;
 
         /*
         Descripción: Genera y devuelve una representación en cadena con la

@@ -72,7 +72,7 @@ class Socios{
 
         Retorna: puntero const a `Socio` si lo encuentra, o `nullptr` si no existe.
         */
-        const Socio * find(long);
+        Socio * find(long);
 
         /*
         Descripción: Devuelve un `Iterador` que itera los socios en orden (in-order).
