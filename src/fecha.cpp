@@ -23,6 +23,7 @@ int Fecha::getAnio () const {
 bool Fecha::esValida() const {
     if (mes < 1 || mes > 12) return false;
     if (dia < 1) return false;
+    if (anio < 0) return false;
 
     int maxDia = diasMes[mes - 1];
     if (mes == 2 && esBisiesto()) maxDia = 29;

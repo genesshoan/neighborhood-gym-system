@@ -188,7 +188,7 @@ void Menu::opcionRegistrarSocio()
 void Menu::opcionListarEntrenadores() {
     Iterador it = sistema.listarEntrenadores();
     if (!it.hayPersonas()) 
-        std::cout << Error(TipoError::ARGUMENTO_INVALIDO, "No hay entrenadores en el sistema").toString() << "\n";
+        std::cout << Error(TipoError::VACIO, "No hay entrenadores en el sistema").toString() << "\n";
     else
         listarIterador(it);
 }
@@ -196,7 +196,7 @@ void Menu::opcionListarEntrenadores() {
 void Menu::opcionListarSocios() {
     Iterador it = sistema.listarSocios();
     if (!it.hayPersonas()) 
-        std::cout << Error(TipoError::ARGUMENTO_INVALIDO, "No hay socios en el sistema").toString() << "\n";
+        std::cout << Error(TipoError::VACIO, "No hay socios en el sistema").toString() << "\n";
     else
     listarIterador(it);
 }
@@ -206,7 +206,7 @@ void Menu::opcionListarSocio() {
     std::string ci;
 
     if (!pedirNumero("Cedula: ", ci)) {
-        error = Error(TipoError::ARGUMENTO_INVALIDO, "La cedula debe de ser un valor numerico");
+        error = Error(TipoError::VACIO, "La cedula debe de ser un valor numerico");
         std::cout << error.toString() << "\n";
         return;
     }
@@ -214,7 +214,7 @@ void Menu::opcionListarSocio() {
     const Socio* socio = sistema.listarSocio(std::stol(ci), error);
 
     if (socio != nullptr) {
-        std::cout << socio->toStringCompleto();
+        std::cout << socio->toStringCompleto() << "\n";
     }
 
     std::cout << error.toString() << "\n";
@@ -227,7 +227,8 @@ void Menu::opcionCalcularCuota() {
     if (!pedirNumero("Mes: ", mes) || !pedirNumero("Cedula: ", ci)) {
         error = Error(TipoError::ARGUMENTO_INVALIDO, "Valor no numerico para cedula o mes");
     } else {
-        sistema.calcularMontoMensualSocio(std::stoi(mes), std::stol(ci), error);
+        float res = sistema.calcularMontoMensualSocio(std::stoi(mes), std::stol(ci), error);
+        std::cout << "Ingreso mensual: " << res;
     }
 
     std::cout << error.toString() << "\n";
@@ -250,7 +251,7 @@ void Menu::opcionCalcularIngresoMensual() {
         return;
     }
 
-    std::cout << "Ingreso total mes " << m << ": " << ingreso << "\n";
+    std::cout << "Ingreso total del mes " << m << ": " << ingreso << "\n";
 }
 
 
@@ -294,7 +295,7 @@ void Menu::opcionEntrenadoresIngresadosAnio() {
         return;
     }
 
-    std::cout << "Entrenadores ingresados en " << anio << ": cantidad=" << cantidad << ", promedio salario=" << promedio << "\n";
+    std::cout << "Entrenadores ingresados en " << anio << ": cantidad=" << cantidad << ", salario promedio=" << promedio << "\n";
 }
 
 
