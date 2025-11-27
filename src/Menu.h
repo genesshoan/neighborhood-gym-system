@@ -13,8 +13,8 @@ class Menu {
 
         CapaLogica sistema;
 
-        bool esNumero(std::string);
-        bool pedirNumero(const std::string &, std::string &);
+        bool esNumero(const std::string &, bool);
+        bool pedirNumero(const std::string &, std::string &, bool);
         void listarIterador(Iterador &);
         int pedirOpcion();
         void opcionRegistrarEntrenador();

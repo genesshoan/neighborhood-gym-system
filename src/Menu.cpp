@@ -1,6 +1,6 @@
 #include "Menu.h"
 
-bool Menu::esNumero(std::string str) {
+bool Menu::esNumero(const std::string &str, bool permitirFloat) {
     if (str.empty()) return false;
 
     bool tienePunto = false;
@@ -8,8 +8,8 @@ bool Menu::esNumero(std::string str) {
 
     int i = 0;
     if (str[0] == '-' || str[0] == '+') {
-        i = 1;
         if (str.size() == 1) return false;
+        i = 1;
     }
 
     for (; i < str.size(); i++) {
@@ -17,12 +17,13 @@ bool Menu::esNumero(std::string str) {
 
         if (std::isdigit((unsigned char)c)) {
             tieneDigito = true;
-
-        } else if (c == '.') {
+        }
+        else if (c == '.') {
+            if (!permitirFloat) return false;
             if (tienePunto) return false;
             tienePunto = true;
-
-        } else {
+        }
+        else {
             return false;
         }
     }
@@ -30,10 +31,11 @@ bool Menu::esNumero(std::string str) {
     return tieneDigito;
 }
 
-bool Menu::pedirNumero(const std::string &msg, std::string &dest) {
+
+bool Menu::pedirNumero(const std::string &msg, std::string &dest, bool permitirFloat) {
     std::cout << msg;
     std::getline(std::cin, dest);
-    return esNumero(dest);
+    return esNumero(dest, permitirFloat);
 }
 
 void Menu::listarIterador(Iterador &it) {
@@ -62,7 +64,7 @@ int Menu::pedirOpcion() {
         
     std::getline(std::cin, opcion);
 
-    return esNumero(opcion) ? std::stoi(opcion) : -1;
+    return esNumero(opcion, false) ? std::stoi(opcion) : -1;
 }
 
 void Menu::opcionRegistrarEntrenador()
@@ -79,8 +81,10 @@ void Menu::opcionRegistrarEntrenador()
     std::cout << "Anio de Comienzo: ";
     std::getline(std::cin, anio);
 
-    if (!esNumero(ci) || !esNumero(salario) || !esNumero(anio)) {
-        error = Error(TipoError::ARGUMENTO_INVALIDO, "Uno de los valores númericos ingresados no es tal");
+    if (!esNumero(ci, false) || !esNumero(anio, false)) {
+        error = Error(TipoError::ARGUMENTO_INVALIDO, "Cedula y anio deben de ser valores numericos enteros");    
+    } else if (!esNumero(salario, true)) {
+        error = Error(TipoError::ARGUMENTO_INVALIDO, "El salario base debe de ser un valor numerico");  
     } else {
         sistema.registrarEntrenador(std::stol(ci), nombre, std::stof(salario), std::stoi(anio), error);
     }
@@ -99,10 +103,8 @@ void Menu::opcionRegistrarSocio()
     std::cout << "Nombre: ";
     std::getline(std::cin, nombre);
 
-    if (!pedirNumero("Cuota Base: ", cuotaBase))
-    {
-        error = Error(TipoError::ARGUMENTO_INVALIDO,
-                      "La cuota base debe ser un número");
+    if (!pedirNumero("Cuota Base: ", cuotaBase, true)) {
+        error = Error(TipoError::ARGUMENTO_INVALIDO, "La cuota base debe ser un valor numerico");
         std::cout << error.toString() << "\n";
         return;
     }
@@ -113,8 +115,8 @@ void Menu::opcionRegistrarSocio()
     std::cout << "Cedula Entrenador: ";
     std::getline(std::cin, ciEnt);
 
-    if (!esNumero(ci) || !esNumero(ciEnt)) {
-        error = Error(TipoError::ARGUMENTO_INVALIDO, "Las cédulas deben ser numéricas");
+    if (!esNumero(ci,  false) || !esNumero(ciEnt, false)) {
+        error = Error(TipoError::ARGUMENTO_INVALIDO, "Las cedulas deben ser un valor numerico entero");
         std::cout << error.toString() << "\n";
         return;
     }
@@ -122,14 +124,14 @@ void Menu::opcionRegistrarSocio()
     std::cout << "Seleccione tipo:\n\t1.\tComun\n\t2.\tBecado\n";
     std::getline(std::cin, tipo);
 
-    int opcionTipo = esNumero(tipo) ? std::stoi(tipo) : -1;
+    int opcionTipo = esNumero(tipo, false) ? std::stoi(tipo) : -1;
 
     switch (opcionTipo) {
     case 1:
     {
         std::string extra;
-        if (!pedirNumero("Extra: ", extra)) {
-            error = Error(TipoError::ARGUMENTO_INVALIDO, "El extra debe ser un valor numérico");
+        if (!pedirNumero("Extra: ", extra, true)) {
+            error = Error(TipoError::ARGUMENTO_INVALIDO, "El extra debe ser un valor numerico");
         }
         else
         {
@@ -153,14 +155,13 @@ void Menu::opcionRegistrarSocio()
     {
         std::string porcentaje, dia, mes, anio;
 
-        if (!pedirNumero("Porcentaje: ", porcentaje) ||
-            !pedirNumero("Dia: ", dia) ||
-            !pedirNumero("Mes: ", mes) ||
-            !pedirNumero("Anio: ", anio)) {
-            error = Error(TipoError::ARGUMENTO_INVALIDO, "Valores numéricos inválidos para fecha o porcentaje");
-        }
-        else
-        {
+        if (!pedirNumero("Porcentaje: ", porcentaje, true)) {
+            error = Error(TipoError::ARGUMENTO_INVALIDO, "El porcentaje debe de ser un valor numerico");
+        } else if (!pedirNumero("Dia: ", dia, false) ||
+            !pedirNumero("Mes: ", mes, false) ||
+            !pedirNumero("Anio: ", anio, false)) {
+            error = Error(TipoError::ARGUMENTO_INVALIDO, "Valor ingresados para la fecha son invalidos, deben de ser numeros enteros");
+        } else {
             Fecha f(std::stoi(dia), std::stoi(mes), std::stoi(anio));
             sistema.registrarSocio(
                 std::stol(ci), 
@@ -205,8 +206,8 @@ void Menu::opcionListarSocio() {
     Error error;
     std::string ci;
 
-    if (!pedirNumero("Cedula: ", ci)) {
-        error = Error(TipoError::VACIO, "La cedula debe de ser un valor numerico");
+    if (!pedirNumero("Cedula: ", ci, false)) {
+        error = Error(TipoError::ARGUMENTO_INVALIDO, "La cedula debe de ser un valor numerico");
         std::cout << error.toString() << "\n";
         return;
     }
@@ -224,11 +225,11 @@ void Menu::opcionCalcularCuota() {
     Error error;
     std::string mes, ci;
 
-    if (!pedirNumero("Mes: ", mes) || !pedirNumero("Cedula: ", ci)) {
-        error = Error(TipoError::ARGUMENTO_INVALIDO, "Valor no numerico para cedula o mes");
+    if (!pedirNumero("Mes: ", mes, false) || !pedirNumero("Cedula: ", ci, false)) {
+        error = Error(TipoError::ARGUMENTO_INVALIDO, "Valor no numerico entero para cedula o mes");
     } else {
         float res = sistema.calcularMontoMensualSocio(std::stoi(mes), std::stol(ci), error);
-        std::cout << "Ingreso mensual: " << res;
+        std::cout << "Cuota del socio para el mes " << mes << ": " << res;
     }
 
     std::cout << error.toString() << "\n";
@@ -238,8 +239,8 @@ void Menu::opcionCalcularIngresoMensual() {
     Error error;
     std::string mes;
 
-    if (!pedirNumero("Mes: ", mes)) {
-        error = Error(TipoError::ARGUMENTO_INVALIDO, "Valor no numerico para mes");
+    if (!pedirNumero("Mes: ", mes, false)) {
+        error = Error(TipoError::ARGUMENTO_INVALIDO, "El valor ingresado para mes es invalido, debe ser un numero entero");
         std::cout << error.toString() << "\n";
         return;
     }
@@ -259,12 +260,12 @@ void Menu::opcionContarBecadosFecha() {
     Error error;
     std::string dia, mes, anio;
 
-    if (!pedirNumero("Dia: ", dia) || !pedirNumero("Mes: ", mes) || !pedirNumero("Anio: ", anio)) {
-        error = Error(TipoError::ARGUMENTO_INVALIDO, "Valores numéricos inválidos para la fecha");
+    if (!pedirNumero("Dia: ", dia, false) || !pedirNumero("Mes: ", mes, false) || !pedirNumero("Anio: ", anio, false)) {
+        error = Error(TipoError::ARGUMENTO_INVALIDO, "Valores numericos invalidos para la fecha, deben ser numeros enteros");
         std::cout << error.toString() << "\n";
         return;
     }
-
+    
     Fecha f(std::stoi(dia), std::stoi(mes), std::stoi(anio));
     int cantidad = sistema.calcularSociosBecadosFecha(f, error);
     if (error.getTipo().value() != TipoError::EXITOSO) {
@@ -280,7 +281,7 @@ void Menu::opcionEntrenadoresIngresadosAnio() {
     Error error;
     std::string anio;
 
-    if (!pedirNumero("Anio: ", anio)) {
+    if (!pedirNumero("Anio: ", anio, false)) {
         error = Error(TipoError::ARGUMENTO_INVALIDO, "Valor no numerico para anio");
         std::cout << error.toString() << "\n";
         return;
@@ -303,8 +304,8 @@ void Menu::opcionSocioMayorCuota() {
     Error error;
     std::string mes;
 
-    if (!pedirNumero("Mes: ", mes)) {
-        error = Error(TipoError::ARGUMENTO_INVALIDO, "Valor no numerico para mes");
+    if (!pedirNumero("Mes: ", mes, false)) {
+        error = Error(TipoError::ARGUMENTO_INVALIDO, "Valor no numerico entero para mes");
         std::cout << error.toString() << "\n";
         return;
     }
