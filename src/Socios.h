@@ -89,7 +89,7 @@ class Socios{
 
         /*
         Descripción: Cuenta la cantidad de socios becados cuya fecha de otorgamiento
-        es posterior a la `Fecha` proporcionada.
+        es mayor o igual a la `Fecha` proporcionada.
 
         Precondición: `f` idealmente debe ser una fecha válida (`f.esValida()`).
         */

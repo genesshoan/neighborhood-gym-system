@@ -39,16 +39,6 @@ class Fecha {
         ~Fecha();
 
         /*
-        Descripción: Establece los valores de la fecha.
-
-        Parámetros:
-        - int: día
-        - int: mes
-        - int: año
-        */
-        void crear (int, int, int);
-
-        /*
         Descripción: Obtiene el día.
 
         Retorna: día (int).

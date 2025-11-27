@@ -17,15 +17,16 @@ class Entrenador : public Persona {
     public:
         
         /*
-        Descripción: Constructor de Entrenador. Inicializa los atributos heredados (cédula y nombre) y los específicos de Entrenador (salarioBase y anioComienzo).
-        
-        Parámetros
-        - long: cédula del entrenador del entrenador.
+        Descripción: Constructor de Entrenador. Inicializa los atributos heredados
+        (cédula y nombre) y los específicos de Entrenador (salarioBase y anioComienzo).
+
+        Parámetros:
+        - long: cédula del entrenador.
         - std::string: nombre del entrenador.
         - float: salarioBase del entrenador.
         - int: anioComienzo, año en que el entrenador comenzó su actividad.
-        
-        Returna: Instancia de Entrenador inicializada.
+
+        Retorna: Instancia de Entrenador inicializada.
         */
         Entrenador(long, std::string, float, int);
 
@@ -36,7 +37,7 @@ class Entrenador : public Persona {
 
         /*
         Descripción: Obtiene el salario base del entrenador.
-        
+
         Retorna: salarioBase actual del entrenador.
         */
         float getSalarioBase() const;
@@ -44,14 +45,15 @@ class Entrenador : public Persona {
         /*
         Descripción: Obtiene el año en que el entrenador comenzó su actividad.
 
-        Returna: anioComienzo del entrenador.
+        Retorna: anioComienzo del entrenador.
         */
         int getAnioComienzo() const;
 
         /*
-        Descripción: Genera y devuelve una representación en cadena con la información relevante del entrenador (por ejemplo id, nombre, salario y año de comienzo).
-    
-        Returna: cadena con la representación textual del entrenador.
+        Descripción: Genera y devuelve una representación en cadena con la
+        información relevante del entrenador (por ejemplo id, nombre, salario y año de comienzo).
+
+        Retorna: cadena con la representación textual del entrenador.
         */
         std::string toString() const;
 };

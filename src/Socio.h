@@ -28,7 +28,7 @@ class Socio : public Persona {
         - std::string: nombre del socio.
         - float: cuotaBase del socio.
         - std::string: domicilio del socio.
-        - Entrenador*: puntero al entrenador asignado (puede ser nullptr).
+        - Entrenador*: puntero al entrenador asignado.
 
         Retorna: Instancia de Socio inicializada.
         */
@@ -56,7 +56,7 @@ class Socio : public Persona {
         /*
         Descripción: Obtiene el entrenador asignado al socio.
 
-        Retorna: puntero constante a Entrenador asignado (const Entrenador*), puede ser nullptr.
+        Retorna: puntero constante a Entrenador asignado (const Entrenador*).
         */
         const Entrenador* getEntrenador() const;
 
@@ -69,7 +69,7 @@ class Socio : public Persona {
         virtual float calcularCuota(int) const = 0;
 
         /*
-        Descripción: Devuelve el tipo de socio (por ejemplo "Activo", "VIP", etc.).
+        Descripción: Devuelve el tipo de socios.
         Método virtual puro que debe implementarse en las subclases.
 
         Retorna: cadena con el tipo del socio.

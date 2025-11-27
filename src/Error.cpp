@@ -3,7 +3,9 @@
 
 Error::Error(TipoError::Value t, const std::string &msg) : tipo(t), mensaje(msg) {}
 
-Error::Error(const TipoError &t, const std::string &msg) : tipo(t), mensaje(msg) {}
+Error::Error() : tipo(TipoError::EXITOSO), mensaje("") {}
+
+Error::~Error() {}
 
 TipoError Error::getTipo() const { return tipo; }
 

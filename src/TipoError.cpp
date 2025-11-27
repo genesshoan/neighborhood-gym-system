@@ -3,7 +3,7 @@
 TipoError::TipoError(Value v) : val(v) {}
 TipoError::TipoError() : val(NO_ENCONTRADO) {}
 
-TipoError::Value TipoError::value() const { return val; }
+TipoError::~TipoError() {}
 
 std::string TipoError::toString() const {
     switch (val) {
@@ -22,4 +22,4 @@ std::string TipoError::toString() const {
     }
 }
 
-TipoError::operator Value() const { return val; }
+TipoError::Value TipoError::value() const { return val; }

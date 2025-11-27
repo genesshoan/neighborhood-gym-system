@@ -17,11 +17,16 @@ private:
 public:
     TipoError(Value v);
     TipoError();
-
+    ~TipoError();
+    /**
+     * Devuelve el valor enumerado interno.
+     */
     Value value() const;
-    std::string toString() const;
 
-    operator Value() const;
+    /**
+     * Devuelve una representación legible del tipo de error.
+     */
+    std::string toString() const;
 };
 
 #endif
